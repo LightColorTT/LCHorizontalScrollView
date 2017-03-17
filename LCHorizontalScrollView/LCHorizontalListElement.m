@@ -9,6 +9,7 @@
 #import "LCHorizontalListElement.h"
 
 static NSInteger const kDefaultOffset = 30;
+static NSInteger const kDefaultOffsetButton = 61;
 
 @interface LCHorizontalListElement () <UIScrollViewDelegate>
 
@@ -165,7 +166,7 @@ static NSInteger const kDefaultOffset = 30;
         if (previousButton) {
             [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[previousButton]-padding-[button]"
                                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                     metrics:@{@"padding" : @(61)}
+                                                                                     metrics:@{@"padding" : @(kDefaultOffsetButton)}
                                                                                        views:NSDictionaryOfVariableBindings(previousButton, button)]];
         } else {
             [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[button]"
@@ -188,6 +189,7 @@ static NSInteger const kDefaultOffset = 30;
 }
 
 - (void)redrawButton{
+    
     UIButton *previousButton;
     NSInteger n;
     for (NSInteger index = 0; index < self.buttons.count; index++) {
@@ -204,7 +206,7 @@ static NSInteger const kDefaultOffset = 30;
         if (previousButton) {
             [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[previousButton]-padding-[button]"
                                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                     metrics:@{@"padding" : @(61)}
+                                                                                     metrics:@{@"padding" : @(60)}
                                                                                        views:NSDictionaryOfVariableBindings(previousButton, button)]];
         } else {
             [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[button]"
@@ -220,7 +222,7 @@ static NSInteger const kDefaultOffset = 30;
     n = previousButton.frame.size.width/2;
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[previousButton]-margin-|"
                                                                              options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:@{@"margin" : @(self.frame.size.width/2-n+1)}//self.frame.size.width/2 + )}//sizeRight}//@(kHTHorizontalSelectionListHorizontalMargin)}
+                                                                             metrics:@{@"margin" : @(self.frame.size.width/2-n+1)}
                                                                                views:NSDictionaryOfVariableBindings(previousButton)]];
 }
 
@@ -263,7 +265,9 @@ static NSInteger const kDefaultOffset = 30;
                                                     blue:49.0f/255.0f
                                                    alpha:1.0f] forState:UIControlStateNormal];
     self.selectedButtonIndex = index;
+    
     [self.scrollView scrollRectToVisible:CGRectInset(newSelectButton.frame, -self.frame.size.width/2 + newSelectButton.frame.size.width/2, 0)animated:YES];
+    //NSLog(@"%@", NSStringFromCGRect(newSelectButton.frame));
     if ([self.delegate respondsToSelector:@selector(selectionList:didSelectButtonWithIndex:)]) {  //change label in view
         [self.delegate selectionList:self didSelectButtonWithIndex:index];
     }

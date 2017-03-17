@@ -20,14 +20,51 @@
 
 @implementation LCGenerateScrollView
 
-- (void)createScrollViewLastLabel:(UILabel *)lastLabel selectedLabel:(UILabel *)labelSelect countLabelAgo:(NSInteger)label {
+- (BOOL)isEqualDate:(NSDate*)date isBetweenDate:(NSDate*)selectDate
+{
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    NSDateComponents *components2 = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:selectDate];
+    if([components day] == [components2 day] && [components month] == [components2 month] && [components year] == [components2 year])
+        return YES;
+    return NO;
+}
+
+- (NSMutableArray *)arrayFromDates:(NSDate *)theLastDate selectedDate:(NSDate *)dateSelect countDaysAgo:(int)days
+{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"]];
+    [formatter setDateFormat:@"d MMMM"];
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    NSString *stringDate;
+    NSDate *dateDaysAgo = [theLastDate dateByAddingTimeInterval:-days*24*60*60];
+    NSDateComponents *components;
+    int i = 0;
+    for (NSDate *dateNew = dateDaysAgo; [dateNew compare:theLastDate] != NSOrderedDescending; dateNew = [dateNew dateByAddingTimeInterval:+24*60*60])
+    {
+        if([self isEqualDate:dateNew isBetweenDate:dateSelect]) {
+            self.selectionList.selectedButtonIndex = i;
+        } else {
+            i++;
+        }
+        
+        components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:dateNew];
+        stringDate = [[formatter stringFromDate:dateNew] stringByReplacingOccurrencesOfString:@"." withString:@""];
+        [array addObject:stringDate];
+    }
+    return array;
+}
+
+
+- (void)createScrollViewtheLastDate:(NSDate *)theLastDate selectedDate:(NSDate *)dateSelect countDaysAgo:(int)days {
     
     self.selectionList = [[LCHorizontalListElement alloc] init];
+    
     self.selectionList.delegate = self;
     self.selectionList.dataSource = self;
-    self.arrayData = [self createListLabel];
-    self.labelSelectedNow = labelSelect;
-    self.labelLast = lastLabel;
+    self.arrayData = [self arrayFromDates:theLastDate selectedDate:dateSelect countDaysAgo:days];
+    self.dateSelectedNow = dateSelect;
+    self.dateLast = theLastDate;
     
 }
 - (void) createScrollView:(UIView *)newView
@@ -39,18 +76,6 @@
     [self.selectionList buttonClick];
     
 }
-
-- (NSMutableArray *)createListLabel {
-    NSMutableArray* tempArray = [NSMutableArray new];
-    
-    for (NSInteger i = 0; i < 7; i++) {
-        UILabel* tempLabel = [UILabel new];
-        tempLabel.text = [NSString stringWithFormat:@"label %ld", i];
-        [tempArray addObject:tempLabel];
-    }
-    return [tempArray copy];
-}
-
 
 - (NSInteger)numberOfItemsInSelectionList:(LCHorizontalListElement *)selectionList {
     return self.arrayData.count;
@@ -65,9 +90,10 @@
 }
 
 - (void)selectionList:(LCHorizontalListElement *)selectionList getSelectedIndexButton:(NSInteger)index{
-    self.labelSelectedNow = self.arrayData[self.selectionList.selectedIndexNow];
-    [self.delegate didChangeValueDateScrollView:self.labelSelectedNow];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"]];
+    [dateFormat setDateFormat:@"d MMMM"];
+    self.dateSelectedNow =[dateFormat dateFromString:self.arrayData[self.selectionList.selectedIndexNow]];
+    [self.delegate didChangeValueDateScrollView:self.dateSelectedNow];
 }
-]
-
 @end

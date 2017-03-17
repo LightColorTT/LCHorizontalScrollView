@@ -15,11 +15,11 @@
 
 @property (weak, nonatomic) id<OTCreaterScrollViewDelegate> delegate;
 
-@property (strong, nonatomic) UILabel *labelSelectedNow;
-@property (strong, nonatomic) UILabel *labelLast;
+@property (strong, nonatomic) NSDate *dateSelectedNow;
+@property (strong, nonatomic) NSDate *dateLast;
 
-- (void)createScrollViewLastLabel:(UILabel *)lastLabel selectedLabel:(UILabel *)labelSelect countLabelAgo:(NSInteger)label;
-- (void)createScrollView:(UIView *)newView;
+- (void) createScrollViewtheLastDate:(NSDate *)theLastDate selectedDate:(NSDate *)dateSelect countDaysAgo:(int) days;
+- (void) createScrollView:(UIView *)newView ;
 
 @end
 

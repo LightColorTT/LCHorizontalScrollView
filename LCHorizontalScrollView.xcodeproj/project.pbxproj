@@ -64,10 +64,7 @@
 		2CB391431E7B22FF00E998DF /* LCHorizontalScrollView */ = {
 			isa = PBXGroup;
 			children = (
-				2CB3915B1E7B233100E998DF /* LCGenerateScrollView.h */,
-				2CB3915C1E7B233100E998DF /* LCGenerateScrollView.m */,
-				2CB3915D1E7B233100E998DF /* LCHorizontalListElement.h */,
-				2CB3915E1E7B233100E998DF /* LCHorizontalListElement.m */,
+				493C5FA11E7C06BF00C3D8B1 /* Group */,
 				2CB391471E7B22FF00E998DF /* AppDelegate.h */,
 				2CB391481E7B22FF00E998DF /* AppDelegate.m */,
 				2CB3914A1E7B22FF00E998DF /* ViewController.h */,
@@ -87,6 +84,17 @@
 				2CB391451E7B22FF00E998DF /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		493C5FA11E7C06BF00C3D8B1 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				2CB3915B1E7B233100E998DF /* LCGenerateScrollView.h */,
+				2CB3915C1E7B233100E998DF /* LCGenerateScrollView.m */,
+				2CB3915D1E7B233100E998DF /* LCHorizontalListElement.h */,
+				2CB3915E1E7B233100E998DF /* LCHorizontalListElement.m */,
+			);
+			name = Group;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,6 +128,7 @@
 				TargetAttributes = {
 					2CB391401E7B22FF00E998DF = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = TT78T4C859;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -284,7 +293,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TT78T4C859;
 				INFOPLIST_FILE = LCHorizontalScrollView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LightColor.LCHorizontalScrollView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -295,7 +306,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TT78T4C859;
 				INFOPLIST_FILE = LCHorizontalScrollView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LightColor.LCHorizontalScrollView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -321,6 +334,7 @@
 				2CB3915A1E7B22FF00E998DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
