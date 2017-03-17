@@ -267,7 +267,6 @@ static NSInteger const kDefaultOffsetButton = 61;
     self.selectedButtonIndex = index;
     
     [self.scrollView scrollRectToVisible:CGRectInset(newSelectButton.frame, -self.frame.size.width/2 + newSelectButton.frame.size.width/2, 0)animated:YES];
-    //NSLog(@"%@", NSStringFromCGRect(newSelectButton.frame));
     if ([self.delegate respondsToSelector:@selector(selectionList:didSelectButtonWithIndex:)]) {  //change label in view
         [self.delegate selectionList:self didSelectButtonWithIndex:index];
     }
